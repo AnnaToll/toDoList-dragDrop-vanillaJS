@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+#background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(-45deg, #1eAE98, #D8B5FF);
+    z-index: -1;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#container {
+    position: relative;
+    top: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+p:last-of-type {
+    margin-bottom: 33px;
+}
+
+#container > section:first-of-type {
+    margin-bottom: 33px;
+}
+
+ul {
+    list-style: none;
+}
+
+.icon-container {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.li-container {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 18px 19px;
+    background-color: white;
+    margin-bottom: 6px;
+    cursor: move;
+}
+
+.li-container > button {
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.3);
+}
+
+#dragged .li-container {
+    opacity: 0.4;
+}
+
+.li-container-sublist {
+    display: flex;
+    height: 48px;
+    padding: 11px 10px;
+    margin-bottom: 6px;
+    cursor: move;
+}
+
+#dragged .li-container-sublist {
+    opacity: 0.4;
+}
+
+.new-list-item {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding-left: 19px;
+    width: 100%;
+    border: 1px dashed white;
+}
+
+
+.new-list-item-sublist {
+    display: flex;
+    align-items: center;
+    height: 49px;
+    padding-left: 10px;
+    width: 100%;
+    border: 1px dashed white;
+}
+
+.add-new-list-object-sublist {
+    display: none;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px dashed white;
+    color: white;
+    cursor: pointer;
+}
+
+.sublist-container {
+    margin-left: 30px;
+    margin-bottom: 18px;
+}
+
+.greyed-out input,
+.greyed-out button,
+.greyed-out .bi-pencil-fill,
+.greyed-out .bi-x-lg,
+.greyed-out .bi-check-lg {
+    color: rgb(194, 193, 193);
+}
+
+.greyed-out button {
+    border: 1px solid rgb(194, 193, 193);
+}
+
+ul .bi {
+    position: relative;
+    top: 3px;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.bi {
+    cursor: pointer;
+}
+
+button,
+input {
+    margin-right: 11px; 
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12.5px;
+    font-weight: 300; 
+    color: rgb(46, 46, 46);
+    border: none;
+}
+
+button {
+    background-color: white;
+    /* background-color: #76bdcf; */
+    cursor: pointer;    
+    padding: 0.5em 1.1em;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    color: black;
+    box-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.2);
+}
+
+input[type='text'] {
+    padding: 7px 1em;                    
+} 
+
+
+.add-list-item-text-input {
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+}
+
+.add-list-item-text-input::placeholder {
+    color: white;
+}
+
+/* .add-list-item-btn {
+    display: none;
+} */
+
+.list-item-text-input {
+    border: none;
+    background: none;
+}
+
+.hidden {
+    display: none;
+}
+
+/* .bi-x-lg {
+    color: red;
+} */
+
+
+.li-container:hover > .icon-container {
+    display: inline-block;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgb(165, 165, 165);
+    vertical-align: sub;                                                      
+    position: relative;   
+    vertical-align: middle;                                   
+}   
+
+input[type='checkbox']:checked {                                     
+    border: 1px solid rgb(194, 193, 193);                                                
+}  
+
+input[type='checkbox']:checked:after {                                
+  content: '';                                                                 
+  position: absolute;                                                         
+  width: 7px;                                                                
+  height: 7px;                                                               
+  border-radius: 50%;                                                         
+  background: rgb(194, 193, 193);                                                        
+  top: 50%;                                                                    
+  transform: translateY(-50%);                                                
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
