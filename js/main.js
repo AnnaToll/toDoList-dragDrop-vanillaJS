@@ -1,34 +1,6 @@
-let btnCreateListItem = document.getElementById('add-list-item-btn'),
-    btnEraseAllItems = document.getElementById('erase-all-items'),
-    createListItemTextInput = document.querySelector('#add-list-item-container > input'),
-    createListItemBtn = document.querySelector('#add-list-item-container > button'),
-    createListItem = document.getElementById('add-list-item'),
-    toDoListContainer = document.getElementById('to-do-container'),
-    toDoList = document.getElementById('ul-to-do'),
-    doneList = document.getElementById('ul-done'),
-    errorEmptyListItem = document.getElementById('error-message'),
-    btnEraseCheckbox = document.getElementById('activate-erase'),
-    counterIdNames = 0;
+let toDoListContainer = document.getElementById('to-do-container'),
+    toDoList = document.getElementById('ul-to-do');
 
-
-
-
-/* btnEraseAllItems.addEventListener('click', () => {
-    toDoList.innerHTML = '';
-    doneList.innerHTML = '';
-    errorEmptyListItem.innerHTML = '';
-    inputCreateListItem.value = '';
-}) */
-
-/* createListItemTextInput.addEventListener('click', () => {
-    createListItemBtn.classList.remove('hidden');
-})
-
-createListItemBtn.addEventListener('click', () => {
-    createListItemBtn.classList.add('hidden');
-    let listItemObject = new ListItem(toDoList, createListItemTextInput.value);
-    createListItemTextInput.value = '';
-}) */
 
 class CreateNewListItem {
     constructor(parentElement) {
@@ -79,9 +51,6 @@ class CreateNewListItem {
         this.createNewItemTextInput.addEventListener('click', () => {
             this.createNewItemBtn.classList.remove('hidden');
             this.isTextFieldClicked = 'yes';
-/*             if (this.parent != toDoListContainer) {
-                this.pare
-            } */
         })
 
         this.addNewListSubListBtn.classList.add('add-new-list-object-sublist');
@@ -96,7 +65,6 @@ class CreateNewListItem {
 
             this.createNewItemBtn.classList.add('hidden');
 
-            
             if (this.createNewItemTextInput.value == '') {
                 if (this.ul.innerHTML == '') 
                     return;
@@ -104,19 +72,16 @@ class CreateNewListItem {
                     this.createNewItemContainer.classList.add('hidden');
                     this.addNewListSubListBtn.style.cssText = 'display: grid;';
                     return;
-                }
-                
+                }   
             }
             
-            if (this.parent == toDoListContainer) {
+            if (this.parent == toDoListContainer){
                 let newListItem = new ListItem(this.container.previousElementSibling, this.createNewItemTextInput.value);
-            }
-            else {
+            } else {
                 let newListItem = new ListItem(this.ul, this.createNewItemTextInput.value);
 
                 this.createNewItemContainer.classList.add('hidden');
                 this.addNewListSubListBtn.style.cssText = 'display: grid;';
-
             }
 
             this.createNewItemTextInput.blur();
@@ -141,55 +106,8 @@ class CreateNewListItem {
             this.createNewItemBtn.click();
         })
     }
-
 }
-
 
 let addListItem = new CreateNewListItem(toDoListContainer);
 
-
-// createListItem.addEventListener('click', () => {
-//     let saveBtn = document.getElementById('save-btn');
-
-//     saveBtn.style.cssText = 'display: inline-block;';
-
-//     saveBtn.addEventListener('click', () => {
-//         /*     if (inputCreateListItem.value == '') {
-//                 errorEmptyListItem.innerHTML = "Du kan ej lägga till tomt listobjekt";
-//                 return;
-//             } */
-            
-//             errorEmptyListItem.innerHTML = '';
-            
-//             let listItemObject = new ListItem(toDoList);
-// /*             listItemObject.setupElements();
-//             listItemObject.eraseParent();
-//             listItemObject.updateList();
-//             listItemObject.checked(doneList);
-//             listItemObject.createSubList(); */
-        
-//             counterIdNames++;
-//             createListItem.value = '';
-//             saveBtn.style.cssText = 'display: none;';
-//         })
-// })
-
-/* btnCreateListItem.addEventListener('click', () => {
-    if (inputCreateListItem.value == '') {
-        errorEmptyListItem.innerHTML = "Du kan ej lägga till tomt listobjekt";
-        return;
-    }
-    
-    errorEmptyListItem.innerHTML = '';
-    
-    let listItemObject = new ListItem(toDoList);
-    listItemObject.setupElements();
-    listItemObject.eraseParent();
-    listItemObject.updateList();
-    listItemObject.checked(doneList);
-    listItemObject.createSubList();
-
-    counterIdNames++;
-    inputCreateListItem.value = '';
-}) */
 

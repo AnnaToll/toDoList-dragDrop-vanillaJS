@@ -23,39 +23,29 @@ h1 {
     color: white;
 }
 
-#container {
-    position: relative;
-    top: 50px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px;
-}
-
-p:last-of-type {
-    margin-bottom: 33px;
-}
-
-#container > section:first-of-type {
-    margin-bottom: 33px;
-}
-
 ul {
     list-style: none;
 }
 
-.icon-container {
-    flex-grow: 1;
-    text-align: right;
+#container {
+    position: relative;
+    top: 90px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+[class*="li-container"] {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    cursor: move;
 }
 
 .li-container {
-    display: flex;
-    align-items: center;
     height: 60px;
     padding: 18px 19px;
     background-color: white;
-    margin-bottom: 6px;
-    cursor: move;
 }
 
 .li-container > button {
@@ -63,20 +53,23 @@ ul {
     box-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.3);
 }
 
-#dragged .li-container {
-    opacity: 0.4;
-}
-
 .li-container-sublist {
-    display: flex;
     height: 48px;
     padding: 11px 10px;
-    margin-bottom: 6px;
-    cursor: move;
 }
 
+#dragged .li-container,
 #dragged .li-container-sublist {
     opacity: 0.4;
+}
+
+.icon-container {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.li-container:hover > .icon-container {
+    display: inline-block;
 }
 
 .new-list-item {
@@ -88,7 +81,6 @@ ul {
     border: 1px dashed white;
 }
 
-
 .new-list-item-sublist {
     display: flex;
     align-items: center;
@@ -99,7 +91,7 @@ ul {
 }
 
 .add-new-list-object-sublist {
-    display: none;
+    display: none; /* Changes to grid when clicked */
     width: 28px;
     height: 28px;
     place-items: center;
@@ -116,8 +108,7 @@ ul {
 .greyed-out input,
 .greyed-out button,
 .greyed-out .bi-pencil-fill,
-.greyed-out .bi-x-lg,
-.greyed-out .bi-check-lg {
+.greyed-out .bi-x-lg {
     color: rgb(194, 193, 193);
 }
 
@@ -125,14 +116,9 @@ ul {
     border: 1px solid rgb(194, 193, 193);
 }
 
-ul .bi {
-    position: relative;
-    top: 3px;
-    font-size: 16px;
-    margin-left: 5px;
-}
-
 .bi {
+    font-size: 16px;
+    margin-left: 8px;
     cursor: pointer;
 }
 
@@ -140,15 +126,12 @@ button,
 input {
     margin-right: 11px; 
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12.5px;
-    font-weight: 300; 
     color: rgb(46, 46, 46);
     border: none;
 }
 
 button {
     background-color: white;
-    /* background-color: #76bdcf; */
     cursor: pointer;    
     padding: 0.5em 1.1em;
     text-transform: uppercase;
@@ -160,14 +143,13 @@ button {
 }
 
 input[type='text'] {
-    padding: 7px 1em;                    
+    font-size: 12.5px;
+    font-weight: 300; 
+    padding: 7px 1em; 
+    background: none;                  
 } 
 
-
 .add-list-item-text-input {
-    border: none;
-    outline: none;
-    background: none;
     color: white;
 }
 
@@ -176,26 +158,8 @@ input[type='text'] {
     color: white;
 }
 
-/* .add-list-item-btn {
-    display: none;
-} */
-
-.list-item-text-input {
-    border: none;
-    background: none;
-}
-
 .hidden {
     display: none;
-}
-
-/* .bi-x-lg {
-    color: red;
-} */
-
-
-.li-container:hover > .icon-container {
-    display: inline-block;
 }
 
 input[type='checkbox'] {

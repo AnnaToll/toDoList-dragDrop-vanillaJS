@@ -1,6 +1,5 @@
 class ListItem {
     constructor(parentElement, inputValue) {
-
         
         this.parent = parentElement;
 
@@ -9,11 +8,14 @@ class ListItem {
         this.container = document.createElement('div');
         this.checkBox = document.createElement('input');
         this.saveBtn = document.createElement('button');
-        this.textFieldValue = inputValue;
         this.textField = document.createElement('input');
+        this.textFieldValue = inputValue;
         this.iconContainer = document.createElement('div');
         this.edit = document.createElement('i');
         this.erase = document.createElement('i');
+
+        this.isTextFieldActive = 'no';
+        this.addNewListItem = {};
 
         this.setupElements();
 
@@ -36,37 +38,79 @@ class ListItem {
             this.erase
         );
 
-        let addNewListItem = new CreateNewListItem(this.li);
-
         if (this.parent == toDoList) {
             this.container.classList.add('li-container');
             this.li.setAttribute('data-level', '0');
         } else {
             this.container.classList.add('li-container-sublist');
-            let level = parseInt(this.parent.parentElement.parentElement.getAttribute('data-level'));
-            level++;
-            this.li.setAttribute('data-level', level.toString());
-
-            let opacity = Math.pow((1*0.5), level);
-
-            this.container.style.cssText = `background-color: rgba(255, 255, 255, ${opacity});`;
+            this.container.style.cssText = this.generateBgColorListItem();
         }
 
         this.container.draggable = true;
-
         this.container.classList.add('li-container');
 
+        this.saveBtn.innerText = 'Save';
+        this.checkBox.type = 'checkbox';
         this.textField.type = 'text';
-        this.textField.classList.add('list-item-text-input');
         this.textField.value = this.textFieldValue;
+
+        this.iconContainer.classList.add('icon-container');
+        this.edit.classList.add('bi', 'bi-pencil-fill');
+        this.erase.classList.add('bi', 'bi-x-lg');
+
+        this.addNewListItem = new CreateNewListItem(this.li);
+        
+        this.eraseParent();
+        this.checked();
+        this.dragAndDrop();
+        this.editListItem();
+        this.saveListItem();
+    }
+
+    generateBgColorListItem() {
+        let level = parseInt(this.parent.parentElement.parentElement.getAttribute('data-level'));
+        level++;
+        this.li.setAttribute('data-level', level.toString());
+
+        let opacity = Math.pow((1*0.5), level);
+        return `background-color: rgba(255, 255, 255, ${opacity});`;
+    }
+
+    editListItem() {
+        
+        this.addNewListItem.container.style.cssText = 'display: none;';
+
         this.textField.addEventListener('click', () => {
             this.textField.focus();
             if (this.textField.value != '') {
                 this.showElements();
-                addNewListItem.container.style.cssText = 'display: block;';
+                this.addNewListItem.container.style.cssText = 'display: block;';
                 this.checkBox.classList.add('hidden');
+            } else this.saveBtn.classList.remove('hidden');
+        })
+
+        this.edit.addEventListener('click', () => {
+            this.textField.click();
+        })
+
+    }    
+
+    saveListItem() {
+
+        this.saveBtn.addEventListener('click', () => {
+            if (this.textField.value == '') {
+                this.saveBtn.classList.add('hidden');
+                return;
             }
-            else this.saveBtn.classList.remove('hidden');
+
+            if (this.addNewListItem.ul.innerHTML != '')
+                this.addNewListItem.container.style.cssText = 'display: block;';
+            else
+                this.addNewListItem.container.style.cssText = 'display: none;';
+            
+            this.textField.blur();
+            this.hideElements();
+            this.checkBox.classList.remove('hidden');
         })
 
         this.textField.addEventListener('keypress', (e) => {
@@ -76,62 +120,23 @@ class ListItem {
             }
         })
 
-
-        let isTextFieldActive = 'no';
-
-        this.saveBtn.innerText = 'Save';
-        this.saveBtn.addEventListener('click', () => {
-            if (this.textField.value == '') {
-                this.saveBtn.classList.add('hidden');
-                return;
-            }
-
-            this.textField.blur();
-
-            if (addNewListItem.ul.innerHTML != '')
-                addNewListItem.container.style.cssText = 'display: block;';
-            else
-                addNewListItem.container.style.cssText = 'display: none;';
-
-            this.hideElements();
-            this.checkBox.classList.remove('hidden');
-        })
-
-        this.iconContainer.classList.add('icon-container');
-        
-        this.attrInput(this.checkBox, 'checkbox', 'check-list-item', 'check-list-item');
-
-        this.edit.classList.add('bi', 'bi-pencil-fill');
-
-        this.edit.addEventListener('click', () => {
-            this.textField.click();
-        })
-
-        this.erase.classList.add('bi', 'bi-x-lg');
-
-        addNewListItem.container.style.cssText = 'display: none;';
-
         document.addEventListener('click', (event) => {
             
-            if (isTextFieldActive == 'yes') {
+            if (this.isTextFieldActive == 'yes') {
 
-                if (event.target != addNewListItem.createNewItemTextInput 
+                if (event.target != this.addNewListItem.createNewItemTextInput 
                     && event.target != this.edit
                     && event.target != this.saveBtn
                     && event.target != this.textField) {
                     this.saveBtn.click();
-                    isTextFieldActive = 'no';
+                    this.isTextFieldActive = 'no';
                 } 
             }
 
             if (event.target == this.textField) {
-                isTextFieldActive = 'yes';
+                this.isTextFieldActive = 'yes';
             }
         })
-        
-        this.eraseParent();
-        this.checked();
-        this.dragAndDrop();
     }
 
     hideElements() {
@@ -143,16 +148,6 @@ class ListItem {
         this.saveBtn.classList.remove('hidden');
         this.checkBox.classList.remove('hidden');
         this.iconContainer.classList.remove('hidden');
-    }
-
-    attrInput(chosenInput, type, name, id, booleanDisabled, value) {
-        chosenInput.type = type;
-        chosenInput.name = name;
-        chosenInput.id = `${id}-${counterIdNames}`;
-        if (chosenInput.type == 'text') {
-            chosenInput.disabled = booleanDisabled;
-            chosenInput.value = value;
-        }
     }
 
     eraseParent() {
