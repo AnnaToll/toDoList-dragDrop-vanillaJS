@@ -79,12 +79,9 @@ class CreateNewListItem {
                 let newListItem = new ListItem(this.container.previousElementSibling, this.createNewItemTextInput.value);
             } else {
                 let newListItem = new ListItem(this.ul, this.createNewItemTextInput.value);
-
-                this.createNewItemContainer.classList.add('hidden');
-                this.addNewListSubListBtn.style.cssText = 'display: grid;';
             }
-
-            this.createNewItemTextInput.blur();
+            
+            this.createNewItemTextInput.click();
             this.createNewItemTextInput.value = '';
         })
 
