@@ -172,14 +172,23 @@ class ListItem {
     }
 
     checked() {
+        let clickedCheckboxIdentifier = 0;
         this.checkBox.addEventListener('click', () => {
             if (this.checkBox.checked) {
+                if (clickedCheckboxIdentifier == 0) {
+                    this.checkBox.setAttribute('data-is-clicked', 'yes');
+                    setTimeout(function() {
+                        clickedCheckboxIdentifier = 0;
+                    }, 500);
+                }
+                clickedCheckboxIdentifier++;
+                console.log(clickedCheckboxIdentifier);
                 this.li.classList.add('greyed-out');
                 if (this.li.lastElementChild.firstElementChild.innerHTML != '') {
                     for (let childListItem of this.li.lastElementChild.firstElementChild.children) {
                         if (!childListItem.firstElementChild.children[1].checked) {
                             childListItem.firstElementChild.children[1].click();
-                            // childListItem.firstElementChild.children[1].setAttribute('data-status', 'not-checked');
+                            childListItem.firstElementChild.children[1].setAttribute('data-status', 'not-checked');
                         }
                         childListItem.firstElementChild.children[1].disabled = true;
                         childListItem.firstElementChild.children[2].disabled = true;
@@ -187,17 +196,20 @@ class ListItem {
                 }
             } else if (!this.checkBox.checked) {
                 this.li.classList.remove('greyed-out');
+                if (this.checkBox.getAttribute('data-is-clicked') == 'yes') {
+                    this.checkBox.removeAttribute('data-is-clicked');
+                }
                 if (this.li.lastElementChild.firstElementChild.innerHTML != '') {
                     for (let childListItem of this.li.lastElementChild.firstElementChild.children) {
-                        // if (childListItem.firstElementChild.children[1].getAttribute('data-status') == 'not-checked') {
-                        //     childListItem.firstElementChild.children[1].disabled = false;
-                        //     childListItem.firstElementChild.children[1].click();
-                        //     childListItem.firstElementChild.children[1].removeAttribute('data-status');
-                        // }
-                        childListItem.firstElementChild.children[1].disabled = false;
-                        childListItem.firstElementChild.children[2].disabled = false;
-                        childListItem.firstElementChild.children[1].click();
-                        childListItem.firstElementChild.children[1].removeAttribute('data-status');
+                        if (childListItem.firstElementChild.children[1].getAttribute('data-status') == 'not-checked') {
+                            childListItem.firstElementChild.children[1].disabled = false;
+                            childListItem.firstElementChild.children[2].disabled = false;
+                            childListItem.firstElementChild.children[1].click();
+                            childListItem.firstElementChild.children[1].removeAttribute('data-status');
+                        }
+                        if (childListItem.firstElementChild.children[1].getAttribute('data-is-clicked') == 'yes') {
+                            childListItem.firstElementChild.children[1].disabled = false;
+                        }
                     }
                 }
             }

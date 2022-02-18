@@ -183,14 +183,14 @@ input[type='checkbox'] {
     -webkit-appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid rgb(165, 165, 165);
+    border: 1px solid rgb(0, 0, 0, 0.4);
     vertical-align: sub;                                                      
     position: relative;   
     vertical-align: middle;                                   
 }   
 
 input[type='checkbox']:checked {                                     
-    border: 1px solid rgb(0, 0, 0, 0.2);;                                                
+    border: 1px solid rgb(0, 0, 0, 0.2);                                                
 }  
 
 input[type='checkbox']:checked:after {                                
@@ -199,7 +199,7 @@ input[type='checkbox']:checked:after {
   width: 7px;                                                                
   height: 7px;                                                               
   border-radius: 50%;                                                         
-  background: rgb(0, 0, 0, 0.2);;                                                        
+  background: rgb(0, 0, 0, 0.2);                                                        
   top: 50%;                                                                    
   transform: translateY(-50%);                                                
   margin-left: auto;
