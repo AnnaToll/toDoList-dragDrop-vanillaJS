@@ -55,6 +55,9 @@ class ListItem {
         this.checkBox.type = 'checkbox';
         this.textField.type = 'text';
         this.textField.value = this.textFieldValue;
+        this.textField.addEventListener('keyup', () => {
+            this.textField.style.cssText += ` width: ${this.textField.value.length}ch;`
+        })
 
         this.iconContainer.classList.add('icon-container');
         this.addSubListItem.innerText = '+ add sublist';
@@ -133,9 +136,6 @@ class ListItem {
         })
 
         document.addEventListener('click', (event) => {
-
-            console.log(event.target);
-            console.log(this.isTextFieldActive);
             
             if (this.isTextFieldActive == 'yes') {
 
@@ -179,18 +179,23 @@ class ListItem {
                     for (let childListItem of this.li.lastElementChild.firstElementChild.children) {
                         if (!childListItem.firstElementChild.children[1].checked) {
                             childListItem.firstElementChild.children[1].click();
-                            childListItem.firstElementChild.children[1].setAttribute('data-status', 'not-checked');
+                            // childListItem.firstElementChild.children[1].setAttribute('data-status', 'not-checked');
                         }
+                        childListItem.firstElementChild.children[1].disabled = true;
                     }
                 }
             } else if (!this.checkBox.checked) {
                 this.li.classList.remove('greyed-out');
                 if (this.li.lastElementChild.firstElementChild.innerHTML != '') {
                     for (let childListItem of this.li.lastElementChild.firstElementChild.children) {
-                        if (childListItem.firstElementChild.children[1].getAttribute('data-status') == 'not-checked') {
-                            childListItem.firstElementChild.children[1].click();
-                            childListItem.firstElementChild.children[1].removeAttribute('data-status');
-                        }
+                        // if (childListItem.firstElementChild.children[1].getAttribute('data-status') == 'not-checked') {
+                        //     childListItem.firstElementChild.children[1].disabled = false;
+                        //     childListItem.firstElementChild.children[1].click();
+                        //     childListItem.firstElementChild.children[1].removeAttribute('data-status');
+                        // }
+                        childListItem.firstElementChild.children[1].disabled = false;
+                        childListItem.firstElementChild.children[1].click();
+                        childListItem.firstElementChild.children[1].removeAttribute('data-status');
                     }
                 }
             }

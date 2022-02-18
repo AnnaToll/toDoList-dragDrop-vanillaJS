@@ -48,6 +48,10 @@ ul {
     background-color: white;
 }
 
+.li-container > input[type='text'] {
+    max-width: 60%;
+}
+
 .li-container > button {
     background-color: rgb(240, 240, 240);
     box-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.3);
@@ -124,6 +128,11 @@ ul {
 .greyed-out button,
 .greyed-out .add-sublist-btn {
     border: 1px solid rgb(0, 0, 0, 0.2);
+}
+
+.greyed-out input[type='text'] {
+    text-decoration: line-through;
+    text-decoration-color: rgb(0, 0, 0, 0.2);
 }
 
 .bi {
