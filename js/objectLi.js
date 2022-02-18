@@ -58,6 +58,7 @@ class ListItem {
 
         this.iconContainer.classList.add('icon-container');
         this.addSubListItem.innerText = '+ add sublist';
+        this.addSubListItem.classList.add('add-sublist-btn');
         this.edit.classList.add('bi', 'bi-pencil-fill');
         this.erase.classList.add('bi', 'bi-x-lg');
 
