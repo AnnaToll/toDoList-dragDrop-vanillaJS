@@ -11,6 +11,7 @@ class ListItem {
         this.textField = document.createElement('input');
         this.textFieldValue = inputValue;
         this.iconContainer = document.createElement('div');
+        this.addSubListItem = document.createElement('button');
         this.edit = document.createElement('i');
         this.erase = document.createElement('i');
 
@@ -34,6 +35,7 @@ class ListItem {
             this.iconContainer
         );
         this.iconContainer.append(
+            this.addSubListItem,
             this.edit,
             this.erase
         );
@@ -55,6 +57,7 @@ class ListItem {
         this.textField.value = this.textFieldValue;
 
         this.iconContainer.classList.add('icon-container');
+        this.addSubListItem.innerText = '+ add sublist';
         this.edit.classList.add('bi', 'bi-pencil-fill');
         this.erase.classList.add('bi', 'bi-x-lg');
 
@@ -64,6 +67,7 @@ class ListItem {
         this.checked();
         this.dragAndDrop();
         this.editListItem();
+        this.addSublist();
         this.saveListItem();
     }
 
@@ -93,7 +97,14 @@ class ListItem {
             this.textField.click();
         })
 
-    }    
+    }
+
+    addSublist() {
+        this.addSubListItem.addEventListener('click', () => {
+            this.addNewListItem.container.style.cssText = 'display: block;';
+            this.addNewListItem.container.lastElementChild.click();
+        })
+    }
 
     saveListItem() {
 
@@ -121,6 +132,9 @@ class ListItem {
         })
 
         document.addEventListener('click', (event) => {
+
+            console.log(event.target);
+            console.log(this.isTextFieldActive);
             
             if (this.isTextFieldActive == 'yes') {
 
@@ -133,7 +147,7 @@ class ListItem {
                 } 
             }
 
-            if (event.target == this.textField) {
+            if (event.target == this.textField || event.target == this.edit) {
                 this.isTextFieldActive = 'yes';
             }
         })
