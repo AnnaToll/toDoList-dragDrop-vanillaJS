@@ -182,6 +182,7 @@ class ListItem {
                             // childListItem.firstElementChild.children[1].setAttribute('data-status', 'not-checked');
                         }
                         childListItem.firstElementChild.children[1].disabled = true;
+                        childListItem.firstElementChild.children[2].disabled = true;
                     }
                 }
             } else if (!this.checkBox.checked) {
@@ -194,6 +195,7 @@ class ListItem {
                         //     childListItem.firstElementChild.children[1].removeAttribute('data-status');
                         // }
                         childListItem.firstElementChild.children[1].disabled = false;
+                        childListItem.firstElementChild.children[2].disabled = false;
                         childListItem.firstElementChild.children[1].click();
                         childListItem.firstElementChild.children[1].removeAttribute('data-status');
                     }
