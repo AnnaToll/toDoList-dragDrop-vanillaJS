@@ -50,6 +50,7 @@ ul {
 
 .li-container > input[type='text'] {
     max-width: 60%;
+    min-width: 26%;
 }
 
 .li-container > button {
