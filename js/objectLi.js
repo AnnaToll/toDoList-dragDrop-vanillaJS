@@ -106,7 +106,7 @@ class ListItem {
     addSublist() {
         this.addSubListItem.addEventListener('click', () => {
             this.addNewListItem.container.style.cssText = 'display: block;';
-            this.addNewListItem.container.lastElementChild.click();
+            this.addNewListItem.addNewListSubListBtn.click();
         })
     }
 

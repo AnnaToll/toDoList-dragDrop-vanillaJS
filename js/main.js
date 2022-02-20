@@ -66,8 +66,12 @@ class CreateNewListItem {
             this.createNewItemBtn.classList.add('hidden');
 
             if (this.createNewItemTextInput.value == '') {
-                if (this.ul.innerHTML == '') 
+                if (this.ul.innerHTML == '') {
+                    if (this.parent != toDoListContainer) {
+                        this.container.style.cssText = 'display: none;';
+                    }
                     return;
+                }
                 else {
                     this.createNewItemContainer.classList.add('hidden');
                     this.addNewListSubListBtn.style.cssText = 'display: grid;';
