@@ -41,6 +41,9 @@ class CreateNewListItem {
             this.createNewItemTextInput.placeholder = '+ Add sublist';
         }
 
+        if (this.parent != toDoListContainer) {
+            this.container.classList.add('hidden');
+        }
         
         this.createNewItemBtn.innerText = 'Save';
         this.createNewItemBtn.classList.add('add-list-item-btn', 'hidden');
@@ -63,30 +66,28 @@ class CreateNewListItem {
 
         this.createNewItemBtn.addEventListener('click', () => {
 
-            this.createNewItemBtn.classList.add('hidden');
-
-            if (this.createNewItemTextInput.value == '') {
-                if (this.ul.innerHTML == '') {
-                    if (this.parent != toDoListContainer) {
-                        this.container.style.cssText = 'display: none;';
-                    }
+            if (this.parent == toDoListContainer) {
+                this.createNewItemBtn.classList.add('hidden');
+                if (this.createNewItemTextInput.value == '') {
                     return;
+                } else if (this.createNewItemTextInput.value != '') {
+                    let newListItem = new ListItem(this.container.previousElementSibling, this.createNewItemTextInput.value);
                 }
-                else {
-                    this.createNewItemContainer.classList.add('hidden');
-                    this.addNewListSubListBtn.style.cssText = 'display: grid;';
+            }
+
+
+            if (this.parent != toDoListContainer) {
+                if (this.createNewItemTextInput.value == '') {
+                    this.hideShowContainerWhenSave();
                     return;
-                }   
+                } else if (this.createNewItemTextInput.value != '') {
+                    let newListItem = new ListItem(this.ul, this.createNewItemTextInput.value);
+                }
             }
-            
-            if (this.parent == toDoListContainer){
-                let newListItem = new ListItem(this.container.previousElementSibling, this.createNewItemTextInput.value);
-            } else {
-                let newListItem = new ListItem(this.ul, this.createNewItemTextInput.value);
-            }
-            
-            this.createNewItemTextInput.click();
+
             this.createNewItemTextInput.value = '';
+            this.createNewItemTextInput.click();
+            this.createNewItemTextInput.focus();
         })
 
         this.addNewListSubListBtn.addEventListener('click', () => {
@@ -106,6 +107,19 @@ class CreateNewListItem {
         this.createNewItemTextInput.addEventListener('blur', () => {
             this.createNewItemBtn.click();
         })
+    }
+
+    showContainer() {
+        this.container.classList.remove('hidden');
+    }
+
+    hideShowContainerWhenSave() {
+        if (this.ul.innerHTML == '')
+        this.container.classList.add('hidden');
+        else if (this.ul.innerHTML != '') {
+            this.createNewItemContainer.classList.add('hidden');
+            this.addNewListSubListBtn.style.cssText = 'display: grid;';
+        }
     }
 }
 

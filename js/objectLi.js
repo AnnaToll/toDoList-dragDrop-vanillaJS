@@ -86,13 +86,11 @@ class ListItem {
 
     editListItem() {
         
-        this.addNewListItem.container.style.cssText = 'display: none;';
-
         this.textField.addEventListener('click', () => {
             this.textField.focus();
             if (this.textField.value != '') {
                 this.showElements();
-                this.addNewListItem.container.style.cssText = 'display: block;';
+                this.addNewListItem.showContainer();
                 this.checkBox.classList.add('hidden');
             } else this.saveBtn.classList.remove('hidden');
         })
@@ -105,7 +103,7 @@ class ListItem {
 
     addSublist() {
         this.addSubListItem.addEventListener('click', () => {
-            this.addNewListItem.container.style.cssText = 'display: block;';
+            this.addNewListItem.showContainer();
             this.addNewListItem.addNewListSubListBtn.click();
         })
     }
@@ -118,10 +116,7 @@ class ListItem {
                 return;
             }
 
-            if (this.addNewListItem.ul.innerHTML != '')
-                this.addNewListItem.container.style.cssText = 'display: block;';
-            else
-                this.addNewListItem.container.style.cssText = 'display: none;';
+            this.addNewListItem.hideShowContainerWhenSave();
             
             this.textField.blur();
             this.hideElements();
