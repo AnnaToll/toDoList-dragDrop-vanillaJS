@@ -8,7 +8,7 @@ class CreateNewListItem {
         this.parent = parentElement;
 
         this.container = document.createElement('div');
-        this.ul = document.createElement('ul');
+        this.listItemsContainer = document.createElement('ul');
         this.createNewItemContainer = document.createElement('div');
         this.createNewItemBtn = document.createElement('button');
         this.createNewItemTextInput = document.createElement('input');
@@ -23,7 +23,7 @@ class CreateNewListItem {
     setupElements() {
         this.parent.append(this.container);
         this.container.append(
-            this.ul,
+            this.listItemsContainer,
             this.createNewItemContainer,
             this.addNewListSubListBtn
         );
@@ -81,7 +81,7 @@ class CreateNewListItem {
                     this.hideShowContainerWhenSave();
                     return;
                 } else if (this.createNewItemTextInput.value != '') {
-                    let newListItem = new ListItem(this.ul, this.createNewItemTextInput.value);
+                    let newListItem = new ListItem(this.listItemsContainer, this.createNewItemTextInput.value);
                 }
             }
 
@@ -114,9 +114,9 @@ class CreateNewListItem {
     }
 
     hideShowContainerWhenSave() {
-        if (this.ul.innerHTML == '')
+        if (this.listItemsContainer.innerHTML == '')
         this.container.classList.add('hidden');
-        else if (this.ul.innerHTML != '') {
+        else if (this.listItemsContainer.innerHTML != '') {
             this.createNewItemContainer.classList.add('hidden');
             this.addNewListSubListBtn.style.cssText = 'display: grid;';
         }
