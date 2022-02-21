@@ -170,6 +170,8 @@ class ListItem {
         let clickedCheckboxIdentifier = 0;
         this.checkBox.addEventListener('click', () => {
             if (this.checkBox.checked) {
+                this.textField.disabled = true;
+                this.addSubListItem.disabled = true;
                 if (clickedCheckboxIdentifier == 0) {
                     this.checkBox.setAttribute('data-is-clicked', 'yes');
                     setTimeout(function() {
@@ -187,9 +189,12 @@ class ListItem {
                         }
                         childListItem.firstElementChild.children[1].disabled = true;
                         childListItem.firstElementChild.children[2].disabled = true;
+                        childListItem.firstElementChild.children[3].firstElementChild.disabled = true;
                     }
                 }
             } else if (!this.checkBox.checked) {
+                this.textField.disabled = false;
+                this.addSubListItem.disabled = false;
                 this.li.classList.remove('greyed-out');
                 if (this.checkBox.getAttribute('data-is-clicked') == 'yes') {
                     this.checkBox.removeAttribute('data-is-clicked');
@@ -199,6 +204,7 @@ class ListItem {
                         if (childListItem.firstElementChild.children[1].getAttribute('data-status') == 'not-checked') {
                             childListItem.firstElementChild.children[1].disabled = false;
                             childListItem.firstElementChild.children[2].disabled = false;
+                            childListItem.firstElementChild.children[3].firstElementChild.disabled = false;
                             childListItem.firstElementChild.children[1].click();
                             childListItem.firstElementChild.children[1].removeAttribute('data-status');
                         }
