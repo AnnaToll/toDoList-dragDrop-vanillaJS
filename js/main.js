@@ -65,9 +65,10 @@ class CreateNewListItem {
     addListItem() {
 
         this.createNewItemBtn.addEventListener('click', () => {
-
+            
+            this.createNewItemBtn.classList.add('hidden');
+            
             if (this.parent == toDoListContainer) {
-                this.createNewItemBtn.classList.add('hidden');
                 if (this.createNewItemTextInput.value == '') {
                     return;
                 } else if (this.createNewItemTextInput.value != '') {
